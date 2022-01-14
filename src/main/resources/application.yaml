@@ -4,3 +4,8 @@ application:
 spring:
   main:
     allow-circular-references: true
+  application:
+    name: HadBotchichik
+telegas:
+  botToken: 1462914779:AAEuZZCpRlkaMvme_D3owMEhQgAElU6d0gE
+  userName: BotBottoBot
