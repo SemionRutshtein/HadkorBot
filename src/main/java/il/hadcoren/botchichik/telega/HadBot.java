@@ -1,5 +1,7 @@
 package il.hadcoren.botchichik.telega;
 
+import com.vdurmont.emoji.EmojiParser;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -10,26 +12,28 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Component
 public class HadBot extends TelegramLongPollingBot {
 
-//    @Value("{telegas.botToken}")
-//    private String token;
-//
-//    @Value("{telegas.userName}")
-//    private String name;
+    @Value("${bot.name}")
+    @Getter
+    private String name;
+
+    @Value("${bot.token}")
+    @Getter
+    private String token;
 
     @Override
     public String getBotUsername() {
-        return "BotBottoBot";
-//        return name;
+        return name;
     }
 
     @Override
     public String getBotToken() {
-//        return token;
-        return "1462914779:AAEuZZCpRlkaMvme_D3owMEhQgAElU6d0gE";
+        return token;
     }
 
     @Override
     public void onUpdateReceived(Update update) {
+        String str = ":stuck_out_tongue_winking_eye:";
+        String smile = EmojiParser.parseToUnicode(str);
 
         if (update.hasMessage() && update.getMessage().hasText()) {
             String message_text = update.getMessage().getText();
@@ -38,7 +42,7 @@ public class HadBot extends TelegramLongPollingBot {
             SendMessage message = new SendMessage();
             message.setChatId(String.valueOf(chat_id));
             message.setText("Had " + message_text + " From Hadbot " + "\n"
-            + " Had Nadav Shalom " );
+            + "Had Nadav Shalom YaAH!" + smile);
             try {
                 execute(message);
             } catch (TelegramApiException e) {
