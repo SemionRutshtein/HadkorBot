@@ -16,7 +16,7 @@ public class ConnectedUser {
 
     private String nikeName;
 
-    private String shotDescription;
+    private String shortDescription;
 
     private String longDescription;
 }
