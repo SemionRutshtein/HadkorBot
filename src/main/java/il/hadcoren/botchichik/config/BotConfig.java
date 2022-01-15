@@ -1,10 +1,15 @@
 package il.hadcoren.botchichik.config;
 
-import il.hadcoren.botchichik.telega.HadBot;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.telegram.telegrambots.meta.TelegramBotsApi;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+@Getter
+@Setter
+@Configuration
+@ConfigurationProperties(prefix = "bot")
 public class BotConfig {
-
+    String name;
+    String token;
 }
