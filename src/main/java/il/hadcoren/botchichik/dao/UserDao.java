@@ -12,8 +12,8 @@ import java.util.Optional;
 
 import static il.hadcoren.botchichik.exception.constants.ExceptionCustomMessages.*;
 
-@Component
 @Slf4j
+@Component
 @RequiredArgsConstructor
 public class UserDao {
 

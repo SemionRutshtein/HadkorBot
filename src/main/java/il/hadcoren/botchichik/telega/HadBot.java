@@ -4,9 +4,7 @@ import com.vdurmont.emoji.EmojiParser;
 import il.hadcoren.botchichik.config.BotConfig;
 import il.hadcoren.botchichik.dao.UserDao;
 import il.hadcoren.botchichik.model.ConnectedUser;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -42,7 +40,7 @@ public class HadBot extends TelegramLongPollingBot {
             ConnectedUser newConnectedUser = ConnectedUser.builder()
                     .id(String.valueOf(update.getMessage().getChatId()))
                     .nikeName(update.getMessage().getForwardFrom().getUserName())
-                    .shotDescription(update.getMessage().getForwardFrom().getLastName())
+                    .shortDescription(update.getMessage().getForwardFrom().getLastName())
                     .longDescription(update.getMessage().getForwardFrom().toString())
                     .build();
             userDao.addNewConnectedUser(newConnectedUser);
@@ -56,8 +54,6 @@ public class HadBot extends TelegramLongPollingBot {
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
-//
-
         }
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class HadBotService {
-
     private final UserDao userDao;
 
 
