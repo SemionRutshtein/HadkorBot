@@ -1,6 +1,7 @@
 package il.hadcoren.botchichik.telega;
 
 import com.vdurmont.emoji.EmojiParser;
+import il.hadcoren.botchichik.config.BotConfig;
 import il.hadcoren.botchichik.dao.UserDao;
 import il.hadcoren.botchichik.model.ConnectedUser;
 import lombok.Getter;
@@ -17,23 +18,16 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class HadBot extends TelegramLongPollingBot {
 
     private final UserDao userDao;
-
-    @Value("${bot.name}")
-    @Getter
-    private String name;
-
-    @Value("${bot.token}")
-    @Getter
-    private String token;
+    private final BotConfig botConfig;
 
     @Override
     public String getBotUsername() {
-        return name;
+        return botConfig.getName();
     }
 
     @Override
     public String getBotToken() {
-        return token;
+        return botConfig.getToken();
     }
 
     @Override
@@ -46,9 +40,9 @@ public class HadBot extends TelegramLongPollingBot {
             long chat_id = update.getMessage().getChatId();
 
             ConnectedUser newConnectedUser = ConnectedUser.builder()
-                    .id(String.valueOf(update.getMessage().getForwardFrom().getId()))
+                    .id(String.valueOf(update.getMessage().getChatId()))
                     .nikeName(update.getMessage().getForwardFrom().getUserName())
-                    .shotDescription(update.getMessage().getForwardFrom().getLastName() + update.getMessage().getForwardFromChat())
+                    .shotDescription(update.getMessage().getForwardFrom().getLastName())
                     .longDescription(update.getMessage().getForwardFrom().toString())
                     .build();
             userDao.addNewConnectedUser(newConnectedUser);
@@ -62,14 +56,7 @@ public class HadBot extends TelegramLongPollingBot {
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                System.out.println("Can not sleep");
-            }
-            SendMessage messageBack = new SendMessage();
-            message.setChatId(String.valueOf(chat_id));
-            message.setText(userDao.getAllConnectedUsers().toString()   );
+//
 
         }
     }
