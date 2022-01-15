@@ -6,6 +6,10 @@ spring:
     allow-circular-references: true
   application:
     name: HadBotchichik
+  data:
+    mongodb:
+      uri: mongodb+srv://admin:admin@cluster0.j1oiw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 bot:
   token: 1462914779:AAEuZZCpRlkaMvme_D3owMEhQgAElU6d0gE
   name: BotBottoBot
+
