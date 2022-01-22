@@ -44,6 +44,4 @@ public class UserDao {
             log.error(DATA_BASE_DELETING_EXCEPTION);
         }
     }
-
-
 }
